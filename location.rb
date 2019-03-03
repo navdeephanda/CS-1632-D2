@@ -18,10 +18,16 @@ class Location
     rand_real = rand(@num_real_rubies + 1)
     rand_fake = rand(@num_fake_rubies + 1)
 
-    rubies = 'rubies'
-    ruby = 'ruby'
-    puts("\tFound #{rand_real} real #{rand_real == 1 ? ruby : rubies} and #{rand_fake}"\
-    " fake #{rand_fake == 1 ? ruby : rubies} in #{@name}")
+    if rand_real.zero? && rand_fake.zero?
+      puts("\tFound no rubies or fake rubies in #{@name}.")
+    elsif rand_real.zero?
+      puts("\tFound #{rand_fake} fake #{rand_fake == 1 ? 'ruby' : 'rubies'} in #{@name}.")
+    elsif rand_fake.zero?
+      puts("\tFound #{rand_real} #{rand_real == 1 ? 'ruby' : 'rubies'} in #{@name}.")
+    else
+      puts("\tFound #{rand_real} #{rand_real == 1 ? 'ruby' : 'rubies'} and #{rand_fake}"\
+      " fake #{rand_fake == 1 ? 'ruby' : 'rubies'} in #{@name}.")
+    end
 
     ret = [rand_real, rand_fake]
     ret
@@ -29,7 +35,7 @@ class Location
 
   def next
     next_loc = neighbors.sample
-    puts("Heading from #{@name} to #{next_loc.name}")
+    puts("Heading from #{@name} to #{next_loc.name}.")
     next_loc
   end
 end

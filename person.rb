@@ -20,7 +20,7 @@ class Person
   end
 
   def go_home
-    puts "After #{@days} #{@days == 1 ? 'day' : 'days'}, Rubyist 1 found:\n\t"\
+    puts "After #{@days} #{@days == 1 ? 'day' : 'days'}, Rubyist #{@id} found:\n\t"\
     "#{@num_real_rubies} #{@num_real_rubies == 1 ? 'ruby' : 'rubies'}.\n\t"\
     "#{@num_fake_rubies} fake #{@num_fake_rubies == 1 ? 'ruby' : 'rubies'}."
 

@@ -29,6 +29,13 @@ class PersonTest < Minitest::Test
         assert_output(/After 0 days, Rubyist 1 found:\n\t11 rubies.\n\t0 fake rubies.\nGoing home victorious!/) {test_rubyist.go_home}
     end
 
+    # Written after a bug was discovered wherein the user was not referred to by the appropriate ID; instead, they were referred to
+    # as Rubyist 1 no matter what.
+    def test_go_home_matches_user_id
+        test_rubyist = Person.new(7)
+        assert_output(/After 0 days, Rubyist 7 found:\n\t0 rubies.\n\t0 fake rubies.\nGoing home empty-handed./) {test_rubyist.go_home}
+    end
+
     def test_store_the_days_winnings_int_args
         test_rubyist = Person.new(1)
         test_rubyist.store_the_days_winnings(7, 6)
