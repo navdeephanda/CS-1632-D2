@@ -1,7 +1,6 @@
-require_relative 'args.rb'
-require_relative 'location.rb'
-require_relative 'person.rb'
+require_relative 'args.rb'; require_relative 'location.rb'; require_relative 'person.rb'
 args = Args.new ARGV
+args.validate_args
 srand(args.seed)
 enumerable_canyon = Location.new('Enumerable Canyon', 1, 1)
 duck_type_beach = Location.new('Duck Type Beach', 2, 2)

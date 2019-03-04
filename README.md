@@ -10,4 +10,6 @@ Another issue I faced was writing concise methods while still fitting all my dri
 
 ## Issues Faced During Code Testing
 
-Because my methods were bigger, they didn't necessarily fit as well into the traditional model of a (Ruby-esque) unit test. I really felt like I was writing C-style unit tests (perhaps because that is what I'm used to).
+Because some of the functionality of the program was necessarily complex, I wrote a lot of bigger functions at first, they didn't necessarily fit as well into the traditional model of a (Ruby-esque) unit test. I really felt like I was writing C-style unit tests (perhaps because that is what I'm used to).
+
+When I tried to convert my bigger methods into smaller ones, I was able to create what I felt was better code style, but to preserve the functionality that a client of the class could reasonably expect, I had to have one big method that calls all of the smaller ones. This presented some weird challenges during unit testing as to what to do about this bigger method: I had to write a test for the bigger method to get appropriate coverage, but writing a test for the bigger method would be redundant if I already wrote all the tests for the smaller ones. I chose to write redundant tests because stubbing the smaller methods when I was testing the bigger method felt wrong (stubbing is only really for methods outside the class, not methods within it).

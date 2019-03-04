@@ -61,7 +61,6 @@ class PersonTest < Minitest::Test
     assert_output(/After 0 days, Rubyist 1 found:\n\t0 rubies.\n\t0 fake rubies.\nGoing home empty-handed./) {test_rubyist.go_home}
   end
 
-
   # UNIT TESTS FOR METHOD store_the_days_winnings(real_rubies, fake_rubies)
   # Equivalence classes:
   # real_rubies = -INFINITY..-1 OR fake_rubies = -INFINITY..-1 -> returns -x

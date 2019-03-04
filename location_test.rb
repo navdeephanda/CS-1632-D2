@@ -10,10 +10,8 @@ class LocationTest < Minitest::Test
   end
 
   def test_next_bounds
-    test_loc = Location.new("Hey I'm a location", 3, 2)
-
+    test_loc = Location.new("Hey I'm a Location", 3, 2)
     test_loc.add_neighbors([Location.new("Hey I'm another location", 1, 2), Location.new("Me too", 2, 0)])
-
     next_loc = test_loc.next
     puts next_loc.name
     assert_includes(test_loc.neighbors, next_loc)
