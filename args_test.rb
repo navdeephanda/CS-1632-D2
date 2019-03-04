@@ -17,6 +17,19 @@ class ArgsTest < Minitest::Test
     assert_equal(test_args[2], args.num_turns)
   end
 
+  # Check, in a quasi-functional manner, that if an invalid
+  # set of arguments is passed into the constructor, 
+  # that the program exits with a code of 1 and displays a
+  # usage guide.
+  def test_abnormal_usage
+    test_args = [-9, -9, -9]
+    args = Args.new test_args
+
+    args.stub(:exit, 1) do
+      assert_output("Usage:\nruby ruby_rush.rb *seed* *num_prospectors* *num_turns\n*seed* should be an integer\n*num_prospectors* should be a non-negative integer\n*num_turns* should be a non-negative integer\n"){args.validate_args}
+    end
+  end
+
   # UNIT TESTS FOR METHOD check_arg_count(argv)
   # Equivalence classes:
   # argv has 3 elements -> returns true
@@ -76,12 +89,6 @@ class ArgsTest < Minitest::Test
     assert_raises(ArgumentError) {args.check_seed(test_args[0])}
   end
 
-  # def test_check_seed_invalid_double
-  #   test_args = [1.2, 2, 3]
-  #   args = Args.new test_args
-  #   assert_raises(ArgumentError) {args.check_seed(test_args[0])}
-  # end
-
   # UNIT TESTS FOR METHOD check_num_prospectors(num_prospectors)
   # Equivalence classes:
   # num_prospectors can be converted to an integer from 0..INFINITY -> returns num_prospectors as Integer
@@ -97,7 +104,7 @@ class ArgsTest < Minitest::Test
   end
 
   # If the seed is a string that can be interpreted as a negative integer, an ArgumentError is raised.
-  def test_check_num_prospectors_valid_int_negative
+  def test_check_num_prospectors_invalid_int_negative
     test_args = [1, -2, 3]
     args = Args.new test_args
     assert_raises(ArgumentError) {args.check_num_prospectors(test_args[1])}
@@ -110,9 +117,6 @@ class ArgsTest < Minitest::Test
     args = Args.new test_args
     assert_raises(ArgumentError) {args.check_num_prospectors(test_args[1])}
   end
-
-  # def test_check_num_prospectors_invalid_double
-  # end
 
   # UNIT TESTS FOR METHOD check_num_turns_type(num_turns)
   # Equivalence classes:
@@ -129,7 +133,7 @@ class ArgsTest < Minitest::Test
   end
 
   # If the seed is a string that can be interpreted as a negative integer, an ArgumentError is raised.
-  def test_check_num_turns_valid_int_negative
+  def test_check_num_turns_invalid_int_negative
     test_args = [1, 2, -3]
     args = Args.new test_args
     assert_raises(ArgumentError) {args.check_num_prospectors(test_args[2])}
@@ -142,9 +146,6 @@ class ArgsTest < Minitest::Test
     args = Args.new test_args
     assert_raises(ArgumentError) {args.check_num_prospectors(test_args[2])}
   end
-
-  # def test_check_num_turns_invalid_double
-  # end
 
   # UNIT TESTS FOR METHOD kill_program
   # This method has no equivalence classes. It has no input parameters,

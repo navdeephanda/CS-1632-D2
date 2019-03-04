@@ -14,9 +14,10 @@ class Location
     @neighbors.concat neighbor
   end
 
-  def search
-    rand_real = rand(@num_real_rubies + 1)
-    rand_fake = rand(@num_fake_rubies + 1)
+  def search(random_object)
+    throw ArgumentError unless random_object.is_a? Random
+    rand_real = random_object.rand(@num_real_rubies + 1)
+    rand_fake = random_object.rand(@num_fake_rubies + 1)
 
     if rand_real.zero? && rand_fake.zero?
       puts("\tFound no rubies or fake rubies in #{@name}.")
@@ -33,8 +34,9 @@ class Location
     ret
   end
 
-  def next
-    next_loc = neighbors.sample
+  def next(random_object)
+    throw ArgumentError unless random_object.is_a? Random
+    next_loc = neighbors[random_object.rand(neighbors.count)]
     puts("Heading from #{@name} to #{next_loc.name}.")
     next_loc
   end

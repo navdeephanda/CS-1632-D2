@@ -2,7 +2,7 @@
 class Person
   attr_accessor :num_real_rubies
   attr_accessor :num_fake_rubies
-  attr_reader :days
+  attr_accessor :days
 
   def initialize(id)
     @id = id
@@ -13,10 +13,23 @@ class Person
     puts "Rubyist #{@id} starting in Enumerable Canyon."
   end
 
-  def store_the_days_winnings(num_real_rubies, num_fake_rubies)
+  def update_rubies(num_real_rubies)
+    throw ArgumentError unless num_real_rubies.is_a? Integer
+    throw ArgumentError unless num_real_rubies >= 0
     @num_real_rubies += num_real_rubies
+    @num_real_rubies
+  end
+
+  def update_fake_rubies(num_fake_rubies)
+    throw ArgumentError unless num_fake_rubies.is_a? Integer
+    throw ArgumentError unless num_fake_rubies >= 0
     @num_fake_rubies += num_fake_rubies
+    @num_fake_rubies
+  end
+
+  def update_days
     @days += 1
+    @days
   end
 
   def go_home
